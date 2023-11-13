@@ -9,7 +9,6 @@ const AccentHeader = (props: any) => {
           {text}
         </p>
       </div>
-      <img src="/icons/close.svg" alt="" />
     </div>
   );
 };
