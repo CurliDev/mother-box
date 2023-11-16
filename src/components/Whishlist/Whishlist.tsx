@@ -1,13 +1,6 @@
-import InfoBar from "../common/InfoBar";
 
 function Whishlist() {
-  return (
-    <>
-      <InfoBar>
-      
-      </InfoBar>
-    </>
-  );
+  return <>Hello world</>;
 }
 
 export default Whishlist;
