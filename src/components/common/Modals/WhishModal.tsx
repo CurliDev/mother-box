@@ -1,6 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import ButtonBox from "../Buttons/ToggleButton";
+import AccentInput from "../Form/AccentInput";
+import AddWhish from "@/components/Whishlist/AddWish";
+import ThemeButton from "../Buttons/ThemeButton";
 
 export default function WhishModal() {
   let [isOpen, setIsOpen] = useState(true);
@@ -55,10 +58,10 @@ export default function WhishModal() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden bg-white dark:bg-boxdark text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="transform overflow-hidden bg-white dark:bg-boxdark text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h1"
-                    style={titleStyle}
+                    style={lightBorder}
                     className="text-2xl font-medium leading-6 text-gray-900 text-black dark:text-white p-6"
                   >
                     Add Wish
@@ -69,18 +72,66 @@ export default function WhishModal() {
                     <button type="button">Cash Fund</button>
                   </div> */}
 
-                  <div className="">
-                    <div className="w-80">
-                      <ButtonBox
-                        leftButtonLabel="Product"
-                        rightButtonLabel="Cash Fund"
-                        initialPosition={bringingPlusOne ? "15px" : "10rem"}
-                        onToggle={togglePlusOne}
-                        buttonWidth={10}
-                      />
+                  <div
+                    style={lightBorder}
+                    className="flex flex-row gap-x-8 px-10 mt-10 mb-5 pb-10 "
+                  >
+                    <div className="flex-1">
+                      <div className="w-80">
+                        <ButtonBox
+                          leftButtonLabel="Product"
+                          rightButtonLabel="Cash Fund"
+                          initialPosition={bringingPlusOne ? "15px" : "10rem"}
+                          onToggle={togglePlusOne}
+                          buttonWidth={10}
+                        />
+                      </div>
+                      <div className="flex flex-col pl-6 gap-y-4 h-full items-center justify-evenly max-h-[400px]">
+                        <AccentInput
+                          title="Title"
+                          placeholder="Title"
+                          value={""}
+                          onChange={() => {}}
+                        />
+                        <div className="flex gap-x-6 ">
+                          <AccentInput
+                            title="Price"
+                            placeholder="Price"
+                            value={""}
+                            onChange={() => {}}
+                          />{" "}
+                          <AccentInput
+                            title="Quantity"
+                            placeholder="1"
+                            value={""}
+                            onChange={() => {}}
+                          />
+                        </div>
+                        <AccentInput
+                          title="Add Detail"
+                          placeholder="Note to your guests"
+                          value={""}
+                          onChange={() => {}}
+                        />
+                      </div>
                     </div>
-                    <div className="p-6">
-                    
+                    <div className="flex-1">
+                      <AddWhish />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-end pb-5 pr-10">
+                    <div className="flex gap-x-4">
+                      <ThemeButton
+                        text={"Abort"}
+                        onClick={() => {}}
+                        isAccent={false}
+                      />
+                      <ThemeButton
+                        text={"Save"}
+                        onClick={() => {}}
+                        isAccent={true}
+                      />
                     </div>
                   </div>
                   {/* <div className="mt-2">
@@ -109,6 +160,6 @@ export default function WhishModal() {
   );
 }
 
-const titleStyle = {
-  borderBottom: "1px solid rgba(0, 0, 0, 0.5)",
+const lightBorder = {
+  borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
 };
