@@ -1,13 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import ButtonBox from "../Buttons/ToggleButton";
-import AccentInput from "../Form/AccentInput";
 import AddWhish from "@/components/Whishlist/AddWish";
 import ThemeButton from "../Buttons/ThemeButton";
+import ProductForm from "@/components/Whishlist/WhishlistProductForm";
+import WhishlistCashFundForm from "@/components/Whishlist/WhishlistCashFundForm";
 
 export default function WhishModal() {
   let [isOpen, setIsOpen] = useState(true);
-  const [bringingPlusOne, setBringingPlusOne] = useState(false);
+  const [currentTab, setCurrentTab] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -17,8 +18,8 @@ export default function WhishModal() {
     setIsOpen(true);
   }
 
-  const togglePlusOne = (value: string) => {
-    setBringingPlusOne(value === "0");
+  const toggleCurrentTab = (value: string) => {
+    setCurrentTab(value === "left");
   };
 
   return (
@@ -62,7 +63,7 @@ export default function WhishModal() {
                   <Dialog.Title
                     as="h1"
                     style={lightBorder}
-                    className="text-2xl font-medium leading-6 text-gray-900 text-black dark:text-white p-6"
+                    className="text-2xl font-medium font-libre-carlson leading-6 text-gray-900 text-black dark:text-white p-6"
                   >
                     Add Wish
                   </Dialog.Title>
@@ -77,43 +78,23 @@ export default function WhishModal() {
                     className="flex flex-row gap-x-8 px-10 mt-10 mb-5 pb-10 "
                   >
                     <div className="flex-1">
-                      <div className="w-80">
+                      <div className="pl-6">
                         <ButtonBox
                           leftButtonLabel="Product"
                           rightButtonLabel="Cash Fund"
-                          initialPosition={bringingPlusOne ? "15px" : "10rem"}
-                          onToggle={togglePlusOne}
-                          buttonWidth={10}
+                          onToggle={toggleCurrentTab}
                         />
                       </div>
-                      <div className="flex flex-col pl-6 gap-y-4 h-full items-center justify-evenly max-h-[400px]">
-                        <AccentInput
-                          title="Title"
-                          placeholder="Title"
-                          value={""}
-                          onChange={() => {}}
-                        />
-                        <div className="flex gap-x-6 ">
-                          <AccentInput
-                            title="Price"
-                            placeholder="Price"
-                            value={""}
-                            onChange={() => {}}
-                          />{" "}
-                          <AccentInput
-                            title="Quantity"
-                            placeholder="1"
-                            value={""}
-                            onChange={() => {}}
-                          />
+
+                      {currentTab ? (
+                        <div className="flex flex-col pl-6 pb-4 gap-y-4 h-full items-center justify-evenly max-h-[400px] w-[450px]">
+                          <ProductForm />
                         </div>
-                        <AccentInput
-                          title="Add Detail"
-                          placeholder="Note to your guests"
-                          value={""}
-                          onChange={() => {}}
-                        />
-                      </div>
+                      ) : (
+                        <div className="flex flex-col pl-6 h-full items-center gap-y-5 max-h-[400px] w-[450px]">
+                          <WhishlistCashFundForm />
+                        </div>
+                      )}
                     </div>
                     <div className="flex-1">
                       <AddWhish />

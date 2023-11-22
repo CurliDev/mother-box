@@ -15,7 +15,7 @@ const ThemeButton = ({ text, onClick, isAccent }) => {
   const accentClasses =
     "bg-lilacPurple text-white hover:bg-purple-700 focus:ring-purple-500";
   const standardClasses =
-    "bg-white text-black border border-black hover:bg-gray-100 ";
+    "bg-white text-black border-2 border-lightgray hover:bg-gray-100 ";
 
   const buttonClasses = `${baseClasses} ${
     isAccent ? accentClasses : standardClasses
