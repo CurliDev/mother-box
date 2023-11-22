@@ -4,40 +4,40 @@ import React, { useState } from "react";
 interface ButtonBoxProps {
   leftButtonLabel: string;
   rightButtonLabel: string;
-  initialPosition: string;
-  buttonWidth: number;
-
   onToggle: (value: string) => void;
 }
 
 const ButtonBox: React.FC<ButtonBoxProps> = ({
   leftButtonLabel,
   rightButtonLabel,
-  initialPosition,
-  buttonWidth,
   onToggle,
 }) => {
-  const [position, setPosition] = useState<string>(initialPosition);
-  const isLeftSelected = position === "15px";
+  const [isLeftSelected, setIsLeftSelected] = useState(true);
 
-  const handleToggle = (value: string) => {
-    setPosition(value);
-    onToggle(value);
+  const handleToggle = () => {
+    const newPosition = isLeftSelected ? "right" : "left";
+    setIsLeftSelected(!isLeftSelected);
+    onToggle(newPosition);
   };
 
   return (
-      <div className="flex items-center justify-center relative p-4 bg-white rounded-full">
-        <div
-          id="btnToggle"
-          className={`bg-midnightIndigo rounded-lg absolute transition-all duration-500`}
-          style={{ left: position, width: buttonWidth + "rem", height: "54px" }}
-        />
+    <div className="relative flex items-center justify-center p-4 bg-white rounded-full w-full">
+      <div
+        id="btnToggle"
+        className={`absolute bg-midnightIndigo rounded-lg transition-transform duration-500`}
+        style={{
+          transform: isLeftSelected ? "translateX(-45%)" : "translateX(45%)",
+          width: "50%",
+          height: "54px",
+        }}
+      />
+      <div className="flex items-center justify-center w-full border-2 border-lightgray rounded-[8px] overflow-hidden">
         <button
           type="button"
           className={`flex-1 text-sm ${
             isLeftSelected ? "text-white" : "text-midnightIndigo"
-          } bg-transparent border-0 outline-none relative text-center ml-2 px-6 py-3`}
-          onClick={() => handleToggle("15px")}
+          } bg-transparent outline-none relative text-center px-6 py-4`}
+          onClick={handleToggle}
         >
           {leftButtonLabel}
         </button>
@@ -45,12 +45,13 @@ const ButtonBox: React.FC<ButtonBoxProps> = ({
           type="button"
           className={`flex-1 text-sm ${
             !isLeftSelected ? "text-white" : "text-midnightIndigo"
-          } bg-transparent border-0 outline-none relative text-center px-6 py-3`}
-          onClick={() => handleToggle("9.5rem")}
+          } bg-transparent outline-none relative text-center px-6 py-4`}
+          onClick={handleToggle}
         >
           {rightButtonLabel}
         </button>
       </div>
+    </div>
   );
 };
 
