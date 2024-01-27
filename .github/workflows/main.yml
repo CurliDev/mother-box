@@ -40,9 +40,10 @@ jobs:
         npm run build
 
     - name: Deploy to Production
-      run: |
-        echo "Deploying to production..."
-        scp -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} -r .next/* ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} "cd ${{ secrets.TARGET_DIR }} && npm install --production && pm2 restart all"
       env:
-        TARGET_DIR: ${{ secrets.TARGET_DIR }}
+        SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+      run: |
+        echo "$SSH_KEY" > ec2_ssh_key.pem
+        chmod 600 ec2_ssh_key.pem
+        ssh -o StrictHostKeyChecking=no -i ec2_ssh_key.pem ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} 'bash -s' < deployment_script.sh
+
