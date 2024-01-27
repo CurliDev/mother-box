@@ -1,7 +1,11 @@
 import CardIcon from "@/statics/icons/card";
+import Image from "next/image";
 import React from "react";
 
-function Wallet({ walletNumber, walletCompany }) {
+function Wallet({ walletNumber, walletCompany }:{
+  walletNumber: number,
+  walletCompany: any,
+}) {
   console.log(walletCompany);
   return (
     <div className="flex flex-col border-2 border-lightgray rounded-[10px] py-2 px-2">
@@ -12,7 +16,7 @@ function Wallet({ walletNumber, walletCompany }) {
         <p className="text-black font-urbanist font-semibold text-sm">
           •• {walletNumber}
         </p>
-        <img src={walletCompany.src} alt={"wallet"} />
+        <Image src={walletCompany.src} alt={"wallet"} />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 import GalleryIcon from "@/statics/icons/gallery";
 import Unsplash from "@/statics/logos/unsplash_small.png";
+import Image from "next/image";
 
 function AddWhish() {
   return (
@@ -28,7 +29,7 @@ function AddWhish() {
                 className="flex items-center justify-center rounded-[8px] border-2 border-lightgray gap-x-4"
                 style={unsplashButton}
               >
-                <img src={Unsplash.src} alt="unsplash" />
+                <Image src={Unsplash.src} alt="unsplash" />
                 <p className="font-urbanist text-lg	 text-black font-semibold">
                   Log in for Unsplash
                 </p>

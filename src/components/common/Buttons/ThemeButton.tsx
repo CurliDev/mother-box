@@ -9,7 +9,15 @@ const baseClasses = {
   gap: "10px",
 };
 
-const ThemeButton = ({ text, onClick, isAccent }) => {
+const ThemeButton = ({
+  text,
+  onClick,
+  isAccent,
+}: {
+  text: string;
+  onClick: any;
+  isAccent: boolean;
+}) => {
   const baseClasses =
     "px-8 py-2 rounded-[8px] focus:outline-lilacPurple focus:ring transition ease-in-out duration-300";
   const accentClasses =
