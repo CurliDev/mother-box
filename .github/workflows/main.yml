@@ -20,14 +20,12 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-      run: echo "Checking out the HubNode-Box repository..."
 
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-      run: echo "Setting up Node.js version ${{ matrix.node-version }}"
 
     - name: Install Dependencies
       run: |
@@ -56,9 +54,7 @@ jobs:
     - name: Deploy to Production
       run: |
         echo "Deploying to production..."
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} 'bash -s' < deployment_script.sh
+        scp -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} -r .next/* ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} "cd ${{ secrets.TARGET_DIR }} && npm install --production && pm2 restart all"
       env:
         TARGET_DIR: ${{ secrets.TARGET_DIR }}
-
-
-    # Optional: Additional notifications or post-deployment steps
