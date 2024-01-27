@@ -1,0 +1,64 @@
+name: CI/CD for HubNode-Box
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x] # Using Node.js version 18
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      run: echo "Checking out the HubNode-Box repository..."
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+      run: echo "Setting up Node.js version ${{ matrix.node-version }}"
+
+    - name: Install Dependencies
+      run: |
+        echo "Installing dependencies..."
+        npm ci
+      env:
+        CI: true
+
+    - name: Linting
+      run: |
+        echo "Running lint checks..."
+        npm run lint
+
+    - name: Build
+      run: |
+        echo "Building the Next.js application..."
+        npm run build
+
+    - name: Run Tests (optional)
+      run: |
+        echo "Running tests..."
+        npm test
+      env:
+        CI: true
+
+    - name: Deploy to Production
+      run: |
+        echo "Deploying to production..."
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} 'bash -s' < deployment_script.sh
+      env:
+        TARGET_DIR: ${{ secrets.TARGET_DIR }}
+
+
+    # Optional: Additional notifications or post-deployment steps
