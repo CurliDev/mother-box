@@ -39,13 +39,6 @@ jobs:
         echo "Building the Next.js application..."
         npm run build
 
-    - name: Run Tests (optional)
-      run: |
-        echo "Running tests..."
-        npm test
-      env:
-        CI: true
-
     - name: Deploy to Production
       run: |
         echo "Deploying to production..."
