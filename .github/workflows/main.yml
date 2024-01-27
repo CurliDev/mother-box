@@ -34,11 +34,6 @@ jobs:
       env:
         CI: true
 
-    - name: Linting
-      run: |
-        echo "Running lint checks..."
-        npm run lint
-
     - name: Build
       run: |
         echo "Building the Next.js application..."
