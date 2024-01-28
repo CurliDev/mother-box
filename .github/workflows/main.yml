@@ -43,17 +43,20 @@ jobs:
       env:
         SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
       run: |
-        # Create a file for the SSH key
-        echo "$SSH_KEY" > ec2_ssh_key.pem
-        chmod 600 ec2_ssh_key.pem
+        # Start the SSH Agent
+        eval "$(ssh-agent -s)"
+        
+        # Add the SSH Key to the SSH Agent
+        echo "$SSH_KEY" | ssh-add -
 
         # Transfer build directory to the EC2 instance
-        scp -o StrictHostKeyChecking=no -i ec2_ssh_key.pem -r .next/* ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
+        scp -o StrictHostKeyChecking=no -r .next/* ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
 
         # Install production dependencies and restart the application
-        ssh -o StrictHostKeyChecking=no -i ec2_ssh_key.pem ubuntu@ec2-54-160-252-223.compute-1.amazonaws.com << 'ENDSSH'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} << 'ENDSSH'
           cd ${{ secrets.TARGET_DIR }}
           npm install --production
           pm2 restart all # or the specific command to start your application
         ENDSSH
+
 
