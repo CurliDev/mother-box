@@ -51,9 +51,9 @@ jobs:
         scp -o StrictHostKeyChecking=no -i ec2_ssh_key.pem -r .next/* ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
 
         # Install production dependencies and restart the application
-        # The specific commands will depend on your server setup
-        ssh -o StrictHostKeyChecking=no -i ec2_ssh_key.pem ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} << 'ENDSSH'
+        ssh -o StrictHostKeyChecking=no -i ec2_ssh_key.pem ubuntu@ec2-54-160-252-223.compute-1.amazonaws.com << 'ENDSSH'
           cd ${{ secrets.TARGET_DIR }}
           npm install --production
           pm2 restart all # or the specific command to start your application
         ENDSSH
+
