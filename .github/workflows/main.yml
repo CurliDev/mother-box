@@ -36,7 +36,7 @@ jobs:
 
     - name: Build
       run: |
-        echo "Building the Next.js application..."
+        echo "Building the Next.js application...."
         npm run build
 
     - name: Deploy to Production
