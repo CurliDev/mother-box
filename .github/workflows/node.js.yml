@@ -1,4 +1,4 @@
-name: CI/CD for HubNode-Box
+name: CI/CD for Mother-Box
 
 on:
   push:
