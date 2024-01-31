@@ -6,11 +6,11 @@ on:
  
 jobs:
   build:
-    runs-on: [self-hosted, example]
+    runs-on: [self-hosted]
  
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
  
     steps:
       - uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
 #     runs-on: self-hosted
 #     strategy:
 #       matrix:
-#         node-version: [18.x] # Using Node.js version 18
+#         node-version: [20.x] # Using Node.js version 20
 
 #     steps:
 #     - name: Checkout Repository
