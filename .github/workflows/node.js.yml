@@ -1,72 +1,37 @@
-name: CI/CD for Mother-Box
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: ["main"]
- 
+    branches: [ main ]
+
 jobs:
-  build:
-    runs-on: [self-hosted]
- 
-    strategy:
-      matrix:
-        node-version: [20.x]
- 
+  setup:
+    runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci --legacy-peer-deps
-      - run: npm run build --if-present
-      - run: pm2 restart example
-# jobs:
-#   build-and-deploy:
-#     runs-on: self-hosted
-#     strategy:
-#       matrix:
-#         node-version: [20.x] # Using Node.js version 20
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: npm install
 
-#     steps:
-#     - name: Checkout Repository
-#       uses: actions/checkout@v2
-#     - name: Setup Node.js
-#       uses: actions/setup-node@v2
-#       with:
-#         node-version: ${{ matrix.node-version }}
-#         cache: 'npm'
+  lint:
+    needs: setup
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: Lint
+      run: npm run lint
 
-#     - name: Install Dependencies
-#       run: |
-#         echo "Installing dependencies..."
-#         npm ci
-#       env:
-#         CI: true
+  build:
+    needs: lint
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: npm run build
 
-#     - name: Build
-#       run: |
-#         echo "Building the Next.js application...."
-#         npm run build
-
-#     - name: Deploy to Production
-#       env:
-#         SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
-#       run: |
-#         # Start the SSH Agent
-#         eval "$(ssh-agent -s)"
-
-#         # Add the SSH Key to the SSH Agent
-#         echo "$SSH_KEY" | ssh-add -
-
-#         # Transfer build directory to the EC2 instance
-#         scp -o StrictHostKeyChecking=no -r .next/* ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
-
-#         # Install production dependencies and restart the application
-#         ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} << 'ENDSSH'
-#           cd ${{ secrets.TARGET_DIR }}
-#           npm install --production
-#           pm2 restart all # or the specific command to start your application
-#         ENDSSH
-
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: Start/Restart Application
+      run: pm2 restart all || pm2 start npm --name "next-app" -- start
