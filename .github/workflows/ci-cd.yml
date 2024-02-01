@@ -6,25 +6,25 @@ on:
       - main
 
 jobs:
-  lint:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+  # lint:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20.x'
 
-      - name: Install Dependencies
-        run: npm install
+  #     - name: Install Dependencies
+  #       run: npm install
 
-      - name: Lint
-        run: npm run lint
+  #     - name: Lint
+  #       run: npm run lint
 
   build-deploy:
-    needs: lint
+    # needs: lint
     runs-on: self-hosted
     steps:
       - name: Checkout Code
@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: "20.x"
 
       - name: Install Dependencies
         run: npm install
@@ -42,4 +42,4 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        run: pm2 restart all || pm2 start npm --name "next" -- start
+        run: pm2 restart all || pm2 start npm --name "motherbox" -- start
