@@ -18,3 +18,5 @@ const useColorMode = () => {
 };
 
 export default useColorMode;
+
+// added commment
