@@ -42,4 +42,4 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        run: pm2 restart all || pm2 start npm --name "motherbox" -- start
+        run: pm2 restart all || pm2 start npm --name "next" -- start
