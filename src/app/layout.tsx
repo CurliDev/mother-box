@@ -6,7 +6,6 @@ import Loader from "@/components/common/Loader";
 
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import { Provider } from "jotai";
 
 export default function RootLayout({
   children,
@@ -24,7 +23,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <Provider>
           <div className="bg-white dark:bg-boxdark-2 dark:text-bodydark">
             {loading ? (
               <Loader />
@@ -58,7 +56,6 @@ export default function RootLayout({
               </div>
             )}
           </div>
-        </Provider>
       </body>
     </html>
   );

@@ -5,14 +5,12 @@ import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import AccentHeader from "../common/Headings";
 import InfoBar from "../common/InfoBar";
-import { useAtom } from "jotai";
-import { headerTextAtom } from "@/store/jotai";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
-  const [headerText, setHeaderText] = useAtom(headerTextAtom);
+  const headerText = "";
 
   return (
     <>
@@ -84,14 +82,14 @@ const Header = (props: {
             </ul>
           </div>
         </div>
-        <InfoBar>
+        {/* <InfoBar>
           <p className="font-urbanist italic ">
             You now have the ability to create a seamless registry directly on
             your wedding website. Add any product from anywhere on the web and
             earn cash for cash gifts. If you have questions, feedback or need
             help getting started, we are here.
           </p>
-        </InfoBar>
+        </InfoBar> */}
       </header>
     </>
   );

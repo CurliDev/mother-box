@@ -6,7 +6,6 @@ function Wallet({ walletNumber, walletCompany }:{
   walletNumber: number,
   walletCompany: any,
 }) {
-  console.log(walletCompany);
   return (
     <div className="flex flex-col border-2 border-lightgray rounded-[10px] py-2 px-2">
       <div className="pb-6">
