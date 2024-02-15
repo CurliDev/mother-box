@@ -16,7 +16,7 @@ function Wallet({ walletNumber, walletCompany }:{
         <p className="text-black font-urbanist font-semibold text-sm">
           •• {walletNumber}
         </p>
-        <Image src={walletCompany.src} alt={"wallet"} />
+        <img src={walletCompany.src} alt={"wallet"} />
       </div>
     </div>
   );

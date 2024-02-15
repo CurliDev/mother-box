@@ -1,12 +1,20 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, FunctionComponent, useState } from "react";
 import ButtonBox from "../Buttons/ToggleButton";
 import AddWhish from "@/components/Whishlist/AddWish";
 import ThemeButton from "../Buttons/ThemeButton";
 import ProductForm from "@/components/Whishlist/WhishlistProductForm";
 import WhishlistCashFundForm from "@/components/Whishlist/WhishlistCashFundForm";
 
-export default function WhishModal() {
+interface WhishModalProps {
+  isModalOpen: boolean;
+  onClose: () => void;
+}
+
+const WhishModal: FunctionComponent<WhishModalProps> = ({
+  isModalOpen,
+  onClose,
+}) => {
   let [isOpen, setIsOpen] = useState(true);
   const [currentTab, setCurrentTab] = useState(false);
 
@@ -24,18 +32,8 @@ export default function WhishModal() {
 
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-lilacPurple dark:text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-        >
-          Open dialog
-        </button>
-      </div>
-
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Transition appear show={isModalOpen} as={Fragment}> 
+      <Dialog as="div" className="relative z-50" onClose={onClose}> 
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -139,8 +137,10 @@ export default function WhishModal() {
       </Transition>
     </>
   );
-}
+};
 
 const lightBorder = {
   borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
 };
+
+export default WhishModal;

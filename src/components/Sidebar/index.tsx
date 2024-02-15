@@ -61,8 +61,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute flex justify-between left-0 top-0 z-9999  h-screen w-75 flex-col overflow-y-hidden bg-midnightIndigo duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+      className={`absolute flex justify-between left-0 top-0 z-49 flex h-screen w-75 flex-col overflow-y-hidden bg-midnightIndigo duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      }`}
     >
       <div className="">
         <div className="flex items-center justify-center gap-y-2 pt-4 pb-2 lg:pt-5">
@@ -110,10 +111,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       <React.Fragment>
                         <Link
                           href="#"
-                          className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(pathname === "/" ||
-                            pathname.includes("dashboard")) &&
+                          className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                            (pathname === "/" ||
+                              pathname.includes("dashboard")) &&
                             "bg-graydark dark:bg-meta-4"
-                            }`}
+                          }`}
                           onClick={(e) => {
                             e.preventDefault();
                             sidebarExpanded
@@ -122,68 +124,35 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           }}
                         >
                           <DashboardIcon />
-                          Dashboard
+                          Fest Plans
                           <ArrowIcon />
                         </Link>
                         <div
-                          className={`translate transform overflow-hidden ${!open && "hidden"
-                            }`}
+                          className={`translate transform overflow-hidden ${
+                            !open && "hidden"
+                          }`}
                         >
                           <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                            <SidebarLinkGroup
-                              activeCondition={
-                                pathname.includes("guest-list")
-                              }
-                            >
-                              {(handleClick, open) => {
-                                return (
-                                  <React.Fragment>
-                                    <Link
-                                      href="#"
-                                      className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(pathname === "/guest-list" ||
-                                        pathname.includes("guest-list")) &&
-                                        "bg-graydark dark:bg-meta-4"
-                                        }`}
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        sidebarExpanded
-                                          ? handleClick()
-                                          : setSidebarExpanded(true);
-                                      }}
-                                    >
-                                      <UsersIcon />
-                                      Guest List
-                                      <ArrowIcon />
-                                    </Link>
-                                    <div
-                                      className={`translate transform overflow-hidden ${!open && "hidden"
-                                        }`}
-                                    >
-                                      <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                                        <li>
-                                          <Link
-                                            href="/dashboard/guest-list/"
-                                            className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/" && "text-white"
-                                              } `}
-                                          >
-                                            Total RSVP
-                                          </Link>
-                                        </li>
-                                        <li>
-                                          <Link
-                                            href="/dashboard/guest-list/list"
-                                            className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/list" && "text-white"
-                                              } `}
-                                          >
-                                            Guest List
-                                          </Link>
-                                        </li>
-                                      </ul>
-                                    </div>
-                                  </React.Fragment>
-                                );
-                              }}
-                            </SidebarLinkGroup>
+                            <li>
+                              <Link
+                                href="/dashboard/whish-list"
+                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                  pathname === "/" && "text-white"
+                                } `}
+                              >
+                                Whishlist
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="/dashboard/guest-list"
+                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                  pathname === "/" && "text-white"
+                                } `}
+                              >
+                                Guestlist
+                              </Link>
+                            </li>
                           </ul>
                         </div>
                       </React.Fragment>
@@ -194,21 +163,22 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 <li>
                   <Link
                     href="/profile"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes("profile") &&
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      pathname.includes("profile") &&
                       "bg-graydark dark:bg-meta-4"
-                      }`}
+                    }`}
                   >
                     <BrushIcon />
                     Website
                   </Link>
                 </li>
-                
                 <li>
                   <Link
                     href="/profile"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes("profile") &&
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      pathname.includes("profile") &&
                       "bg-graydark dark:bg-meta-4"
-                      }`}
+                    }`}
                   >
                     <UsersIcon />
                     Profile
@@ -218,9 +188,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 <li>
                   <Link
                     href="/settings"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes("settings") &&
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      pathname.includes("settings") &&
                       "bg-graydark dark:bg-meta-4"
-                      }`}
+                    }`}
                   >
                     <svg
                       className="fill-current"
@@ -261,7 +232,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       </div>
 
       <div className="flex items-center justify-center mb-8 ">
-        <button className="flex items-center justify-center w-full" style={helpButton}>
+        <button
+          className="flex items-center justify-center w-full"
+          style={helpButton}
+        >
           <HelpIcon />
           Help
         </button>
