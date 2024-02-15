@@ -80,14 +80,14 @@ const Header = (props: {
             </ul>
           </div>
         </div>
-        <InfoBar>
+        {/* <InfoBar>
           <p className="font-urbanist italic ">
             You now have the ability to create a seamless registry directly on
             your wedding website. Add any product from anywhere on the web and
             earn cash for cash gifts. If you have questions, feedback or need
             help getting started, we are here.
           </p>
-        </InfoBar>
+        </InfoBar> */}
       </header>
     </>
   );
