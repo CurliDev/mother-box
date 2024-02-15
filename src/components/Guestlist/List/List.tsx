@@ -1,6 +1,6 @@
 "use client";
 
-import InfoBox from './Infobox';
+import InfoBox from '../../common/ThemeInfoBox/index';
 
 type InfoBoxData = {
     color: string;

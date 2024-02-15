@@ -12,7 +12,7 @@ function Whishlist() {
     <>
       <div className="flex justify-start items-center">
         <div>
-          <button className=" flex items-center justify-center flex-col w-64 h-80 border-2 border-dashed border-lilacPurple flex justify-center items-center">
+          <button className=" flex items-center justify-center flex-col w-64 h-80 border-2 border-dashed border-lilacPurple">
             <div
               // onClick={createRipple}
               className="text-4xl font-semibold text-gray-700"
