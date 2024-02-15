@@ -1,7 +1,5 @@
 "use client";
 
-
-import React from 'react'
 import InfoBox from './Infobox';
 
 type InfoBoxData = {
@@ -11,6 +9,7 @@ type InfoBoxData = {
     total: number;
     responded: number;
 }[];
+
 const infoBoxData: InfoBoxData = [
     {
         color: '#A0B810',
@@ -38,7 +37,6 @@ const infoBoxData: InfoBoxData = [
 
 function List() {
     return (
-        <React.Fragment>
             <div className="flex gap-3 justify-around items-center">
                 {infoBoxData.map((info, index) => (
                     <InfoBox
@@ -53,7 +51,6 @@ function List() {
                 {/* <InfoBox color="#E56721" heading="Sales" text="Total" total={40} responded={5} />
                 <InfoBox color="#2C2634" heading="Sales" text="Total sales for the month" total={0} responded={5} /> */}
             </div>
-        </React.Fragment>
     )
 }
 
