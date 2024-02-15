@@ -29,7 +29,7 @@ function AddWhish() {
                 className="flex items-center justify-center rounded-[8px] border-2 border-lightgray gap-x-4"
                 style={unsplashButton}
               >
-                <Image src={Unsplash.src} alt="unsplash" />
+                <img src={Unsplash.src}  alt="unsplash" />
                 <p className="font-urbanist text-lg	 text-black font-semibold">
                   Log in for Unsplash
                 </p>
