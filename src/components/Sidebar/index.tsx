@@ -61,7 +61,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute flex justify-between left-0 top-0 z-9999 flex h-screen w-75 flex-col overflow-y-hidden bg-midnightIndigo duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      className={`absolute flex justify-between left-0 top-0 z-9999  h-screen w-75 flex-col overflow-y-hidden bg-midnightIndigo duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
     >
       <div className="">
@@ -130,15 +130,60 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             }`}
                         >
                           <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                            <li>
-                              <Link
-                                href="/"
-                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/" && "text-white"
-                                  } `}
-                              >
-                                eCommerce
-                              </Link>
-                            </li>
+                            <SidebarLinkGroup
+                              activeCondition={
+                                pathname.includes("guest-list")
+                              }
+                            >
+                              {(handleClick, open) => {
+                                return (
+                                  <React.Fragment>
+                                    <Link
+                                      href="#"
+                                      className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(pathname === "/guest-list" ||
+                                        pathname.includes("guest-list")) &&
+                                        "bg-graydark dark:bg-meta-4"
+                                        }`}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        sidebarExpanded
+                                          ? handleClick()
+                                          : setSidebarExpanded(true);
+                                      }}
+                                    >
+                                      <UsersIcon />
+                                      Guest List
+                                      <ArrowIcon />
+                                    </Link>
+                                    <div
+                                      className={`translate transform overflow-hidden ${!open && "hidden"
+                                        }`}
+                                    >
+                                      <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                                        <li>
+                                          <Link
+                                            href="/dashboard/guest-list/"
+                                            className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/" && "text-white"
+                                              } `}
+                                          >
+                                            Total RSVP
+                                          </Link>
+                                        </li>
+                                        <li>
+                                          <Link
+                                            href="/dashboard/guest-list/list"
+                                            className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/list" && "text-white"
+                                              } `}
+                                          >
+                                            Guest List
+                                          </Link>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </React.Fragment>
+                                );
+                              }}
+                            </SidebarLinkGroup>
                           </ul>
                         </div>
                       </React.Fragment>
@@ -157,60 +202,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     Website
                   </Link>
                 </li>
-                <SidebarLinkGroup
-                  activeCondition={
-                    pathname.includes("guest-list")
-                  }
-                >
-                  {(handleClick, open) => {
-                    return (
-                      <React.Fragment>
-                        <Link
-                          href="#"
-                          className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(pathname === "/guest-list" ||
-                            pathname.includes("guest-list")) &&
-                            "bg-graydark dark:bg-meta-4"
-                            }`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            sidebarExpanded
-                              ? handleClick()
-                              : setSidebarExpanded(true);
-                          }}
-                        >
-                          <UsersIcon />
-                          Guest List
-                          <ArrowIcon />
-                        </Link>
-                        <div
-                          className={`translate transform overflow-hidden ${!open && "hidden"
-                            }`}
-                        >
-                          <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                            <li>
-                              <Link
-                                href="/guest-list/"
-                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/" && "text-white"
-                                  } `}
-                              >
-                                Total RSVP
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="/guest-list/list"
-                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/list" && "text-white"
-                                  } `}
-                              >
-                                Guest List
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </React.Fragment>
-                    );
-                  }}
-                </SidebarLinkGroup>
+                
                 <li>
                   <Link
                     href="/profile"

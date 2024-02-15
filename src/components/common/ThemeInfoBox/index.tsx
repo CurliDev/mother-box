@@ -10,7 +10,7 @@ interface InfoBoxProps {
 // bg-${color}-200
 const InfoBox: React.FC<InfoBoxProps> = ({ color, text, heading, total, responded }) => {
     return (
-        <div style={{ backgroundColor: `${color}1F` }} className={` w-full rounded-lg shadow-md p-6`}>
+        <div style={{ backgroundColor: `${color}1F` }} className={` w-full max-w-[400px] rounded-lg shadow-md p-6`}>
             <div className='flex justify-between items-center'>
                 <div className="flex flex-col items-start justify-start">
                     <div className='flex gap-1 items-center '>
