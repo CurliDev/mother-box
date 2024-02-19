@@ -13,20 +13,24 @@ const AccentInput: React.FC<TextInputProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-y-2 w-full">
-      <p className="flex-shrink-0 tracking-wider text-md font-urbanist font-bold text-midnightIndigo dark:text-white">
+      {/* <p className="flex-shrink-0 tracking-wider text-md font-urbanist font-bold text-midnightIndigo dark:text-white">
         {title}
-      </p>
+      </p> */}
       <div
         style={{ borderBottom: "2px solid #cccccc" }}
-        className="flex items-center w-full py-1 focus:border-midnightIndigo"
+        className="flex items-center w-full py-1 focus:border-midnightIndigo relative"
       >
         <input
           type="text"
-          placeholder={placeholder || title}
+          // placeholder={placeholder || title}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="text-midnightIndigo outline-none text-md flex-grow bg-transparent pl-1 border-lightgray"
+          className="text-midnightIndigo text-md flex-grow bg-transparent pl-1 py-1 focus:outline-none focus:border-purple-600 transition-colors peer
+          "
         />
+        <label className="absolute left-0 top-1 text-black cursor-text peer-focus:text-md peer-focus:-top-4 peer-focus:text-purple-600 transition-all text-md font-urbanist font-bold text-midnightIndigo dark:text-white">
+          {title}
+        </label>
       </div>
     </div>
   );
