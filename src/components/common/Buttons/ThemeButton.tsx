@@ -1,14 +1,3 @@
-import React from "react";
-
-const baseClasses = {
-  borderRadius: "8px",
-  padding: "18px, 48px, 18px, 48px",
-  width: "156px",
-  height: "54px",
-  border: "1px solid #2C263426",
-  gap: "10px",
-};
-
 const ThemeButton = ({
   text,
   onClick,

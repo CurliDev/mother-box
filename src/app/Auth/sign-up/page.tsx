@@ -2,7 +2,6 @@
 
 import SignUp from "@/components/Auth/SignUp"
 
-
 function page() {
   return (
     <SignUp/>
