@@ -58,8 +58,8 @@ const SignInForm: React.FC = () => {
             </div>
             <div className="flex items-center">
               <div className=" flex items-center px-4 py-2 bg-sky-500 text-black rounded hover:bg-blue-700">
-                <p>Already have an account?</p>
-                <a className="text-sky-400 cursor-pointer ml-2" >Log in</a>
+                <p>Don't have an account?</p>
+                <a className="text-sky-100 cursor-pointer ml-2">Signup</a>
               </div>
               <a href="#" className="text-sm text-blue-600 hover:underline">
                 Forgot password?
