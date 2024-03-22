@@ -4,15 +4,11 @@ import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import AccentHeader from "../common/Headings";
-import InfoBar from "../common/InfoBar";
-import { useAtom } from "jotai";
-import { headerTextAtom } from "@/store/jotai";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
-  const [headerText, setHeaderText] = useAtom(headerTextAtom);
 
   return (
     <>
@@ -67,7 +63,7 @@ const Header = (props: {
           </div>
 
           <div className="hidden sm:block">
-            <AccentHeader text={headerText} />
+            <AccentHeader text={"headerText"} />
           </div>
 
           <div className="flex items-center gap-3 2xsm:gap-7">

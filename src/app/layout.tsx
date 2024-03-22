@@ -1,6 +1,10 @@
 "use client";
+
 import "./globals.css";
 import "./fonts.css";
+
+import { Provider } from "react-redux";
+import { store } from "@/app/store";
 
 export default function RootLayout({
   children,
@@ -8,8 +12,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <Provider store={store}>
       <body suppressHydrationWarning={true}>{children}</body>
-    </html>
+    </Provider>
   );
 }

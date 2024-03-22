@@ -3,7 +3,6 @@
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import Loader from "@/components/common/Loader";
-import { Provider } from "jotai";
 import { useState, type ReactNode, useEffect } from "react";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
@@ -16,7 +15,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <Provider>
       <div className="bg-white dark:bg-boxdark-2 dark:text-bodydark">
         {loading ? (
           <Loader />
@@ -50,6 +48,5 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </div>
         )}
       </div>
-    </Provider>
   );
 }
